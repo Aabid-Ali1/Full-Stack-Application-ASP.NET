@@ -1,0 +1,52 @@
+body {
+    text-align: center;
+
+}
+
+h1 {
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 50px;
+    padding: 20px;
+}
+
+th:nth-child(odd) {
+    background-color: chartreuse;
+}
+
+tr:nth-child(odd) {
+    background-color: chartreuse;
+
+}
+
+td {
+    margin: 0 auto;
+}
+
+
+
+#table {
+    display: table;
+    background-color: grey;
+    align-items: center;
+    margin: 0 auto;
+    width: 75%;
+}
+
+#data {
+    display: table;
+    background-color: grey;
+    margin: 0 auto;
+    width: 75%;
+
+}
+
+button {
+    width: 100%;
+}
+
+td {
+
+    width: 1fr;
+}

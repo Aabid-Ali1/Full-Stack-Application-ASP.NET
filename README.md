@@ -4,16 +4,6 @@ A full stack web application built with an interactive user interface and an ASP
 
 ---
 
-## Demo
-
-- Live demo: *(Hosted on an academic server)*
-- Screenshots:
-  - Interactive user interface
-  - Asynchronous data updates
-  - Database-driven features
-
----
-
 ## Technologies Used
 
 ### Frontend
@@ -62,4 +52,16 @@ This project follows a clear separation of concerns between the UI, server logic
 1. Install the .NET SDK.
 2. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/Aabid-Ali1/Full-Stack-Application-ASP.NET
+   
+   To run this project locally, you will need:
+- .NET 8 SDK
+- SQL Server (local or containerized)
+
+Update the connection string in `appsettings.Development.json`
+with your own database credentials.
+
+## Configuration
+This project uses `appsettings.json` for placeholder configuration.
+Sensitive database credentials are stored locally in `appsettings.Development.json`
+and are not included in this repository.
