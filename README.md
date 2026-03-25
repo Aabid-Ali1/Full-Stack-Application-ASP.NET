@@ -47,21 +47,39 @@ This project follows a clear separation of concerns between the UI, server logic
 
 ---
 
+## Prerequisites
+- .NET 8 SDK
+- SQL Server with access to the ClassTrak database
+
 ## Running the Project Locally
 
-1. Install the .NET SDK.
-2. Clone this repository:
-   ```bash
+1. Clone this repository:
+```bash
    git clone https://github.com/Aabid-Ali1/Full-Stack-Application-ASP.NET
-   
-   To run this project locally, you will need:
-- .NET 8 SDK
-- SQL Server (local or containerized)
+```
 
-Update the connection string in `appsettings.Development.json`
-with your own database credentials.
+2. Configure your credentials by creating `appsettings.Development.json` in the project root:
+```json
+   {
+     "ConnectionStrings": {
+       "ClassTrak": "Server=YOUR_SERVER;Database=YOUR_DB;User Id=YOUR_USER;Password=YOUR_PASSWORD;"
+     }
+   }
+```
+
+3. Run the project:
+```bash
+   dotnet run
+```
 
 ## Configuration
+
 This project uses `appsettings.json` for placeholder configuration.
 Sensitive database credentials are stored locally in `appsettings.Development.json`
-and are not included in this repository.
+and are **not** included in this repository.
+
+Make sure `appsettings.Development.json` is listed in your `.gitignore` to avoid
+accidentally committing credentials:
+```
+appsettings.Development.json
+```
