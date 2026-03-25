@@ -41,6 +41,9 @@ namespace FullStackServerSide
         /// <summary>
         /// Retrieves all classes associated with a specific student.
         /// Joins Students, Classes, and Instructors tables.
+        /// Note: This method uses direct string interpolation for the student ID, which introduces
+        /// a SQL injection risk. This is intentional to demonstrate how the query can be improved
+        /// by using a parameterized stored procedure, as seen in DeleteStudent and EditStudent.
         /// </summary>
         /// <param name="id">Student ID</param>
         /// <returns>A 2D list representing class and instructor data</returns>
@@ -77,7 +80,7 @@ namespace FullStackServerSide
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new("DeleteStudent", conn))
+                using (SqlCommand cmd = new SqlCommand("DeleteStudent", conn))
                 {
                     // Indicate that the command is a stored procedure
                     cmd.CommandType = StoredProcedure;
@@ -117,7 +120,7 @@ namespace FullStackServerSide
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new("EditStudent", conn))
+                using (SqlCommand cmd = new SqlCommand("EditStudent", conn))
                 {
                     cmd.CommandType = StoredProcedure;
 
@@ -143,26 +146,28 @@ namespace FullStackServerSide
         {
             List<List<string>> retData = new();
 
-            using (SqlConnection conn = new(ClassTrakConn))
+            using (SqlConnection conn = new SqlConnection(ClassTrakConn))
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new(query, conn))
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    // Add column headers as the first row
-                    retData.Add(new List<string>());
-                    for (int i = 0; i < reader.FieldCount; i++)
-                        retData[0].Add(reader.GetName(i));
-
-                    // Read each row of data
-                    while (reader.Read())
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {    
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        List<string> row = new();
+                        // Add column headers as the first row
+                        retData.Add(new List<string>());
                         for (int i = 0; i < reader.FieldCount; i++)
-                            row.Add(reader[i].ToString());
-
-                        retData.Add(row);
+                            retData[0].Add(reader.GetName(i));
+    
+                        // Read each row of data
+                        while (reader.Read())
+                        {
+                            List<string> row = new();
+                            for (int i = 0; i < reader.FieldCount; i++)
+                                row.Add(reader[i].ToString());
+    
+                            retData.Add(row);
+                        }
                     }
                 }
             }
